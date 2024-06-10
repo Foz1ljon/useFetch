@@ -6,23 +6,22 @@ export const useFetch = () => {
   const searchText = ref();
   const products = ref();
 
-  const getAll = axios
-    .get("https://dummyjson.com/products", {
-      params: { q: searchText.value },
-    })
-    .then((res) => {
-      products.value = res.data;
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      isLoading.value = false;
-    });
-onBeforeMount(() => {
-    getAll();
-})
-  
+  const getAll = () => {
+    axios
+      .get("https://dummyjson.com/products", {
+        params: { q: searchText.value, limit: 8 },
+      })
+      .then((res) => {
+        products.value = res.data.products;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        isLoading.value = false;
+      });
+  };
+
 
   return {
     getAll,
