@@ -18,7 +18,6 @@ export const useAuth = () => {
           userData
         );
         isLogin.value = true;
-
         console.log(response);
       } catch (err) {
         error.value = err.response ? err.response.data.message : err.message;

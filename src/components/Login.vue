@@ -24,7 +24,7 @@
             placeholder="Enter a password..."
             required
           />
-          <button @click="show" class="absolute top-2 right-2">
+          <button @click="show" class="absolute top-2 right-2" type="button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -54,7 +54,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useFunc } from "../composables/useFunction";
 import { useAuth } from "../composables/useLogin.js";
 import { useRouter } from "vue-router";
@@ -64,7 +63,8 @@ const { show, type } = useFunc();
 const { userData, login, isLogin, error } = useAuth();
 
 const handleSubmit = async () => {
+  console.log("+++");
   await login(userData.value);
-  if (isLogin.value) router.push("/products");
+  isLogin.value ? router.push("/products") : router.push("/login");
 };
 </script>
